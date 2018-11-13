@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry
+    location="/Users/kc/.m2/repository/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"/>
+  <context id="my" targetRuntime="MyBatis3">
+    <commentGenerator>
+      <property name="suppressDate" value="false"/>
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+      connectionURL="jdbc:mysql://localhost:3306/test"
+      userId="root"
+      password="123456"/>
+
+    <javaModelGenerator targetPackage="com.exam.yiyou.examadmin.repository.model"
+      targetProject="/Users/kc/Documents/github/exam-admin/src/main/java">
+      <property name="enableSubPackages" value="true"/>
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="com.exam.yiyou.examadmin.repository.mapper"
+      targetProject="/Users/kc/Documents/github/exam-admin/src/main/java">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+
+    <javaClientGenerator targetPackage="com.exam.yiyou.examadmin.repository.mapper"
+      targetProject="/Users/kc/Documents/github/exam-admin/src/main/java"
+      type="XMLMAPPER">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+
+    <table tableName="tb_error_exam" domainObjectName="ErrorExam">
+    </table>
+    <table tableName="tb_exam" domainObjectName="Exam">
+    </table>
+    <table tableName="tb_exam_answer" domainObjectName="ExamAnswer">
+    </table>
+    <table tableName="tb_expire" domainObjectName="Expire">
+    </table>
+    <table tableName="tb_module" domainObjectName="Module">
+    </table>
+    <table tableName="tb_paper" domainObjectName="Paper">
+    </table>
+    <table tableName="tb_role" domainObjectName="Role">
+    </table>
+    <table tableName="tb_role_source" domainObjectName="RoleSource">
+    </table>
+    <table tableName="tb_special" domainObjectName="Special">
+    </table>
+    <table tableName="tb_test_centre" domainObjectName="testCentre">
+    </table>
+    <table tableName="tb_user" domainObjectName="User">
+    </table>
+    <table tableName="tb_user_role" domainObjectName="UserRole">
+    </table>
+
+
+  </context>
+</generatorConfiguration>
