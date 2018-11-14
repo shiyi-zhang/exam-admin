@@ -7,11 +7,13 @@ import com.exam.yiyou.examadmin.repository.model.ExamExample;
 import com.exam.yiyou.examadmin.service.ExamService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 张世一
  * @version 1.0
  */
+@Service
 public class ExamServiceImpl implements ExamService {
 @Autowired
 private ExamMapper examMapper;

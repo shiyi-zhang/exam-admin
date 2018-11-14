@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.exam.yiyou.examadmin.repository.model.Role" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_user" property="createUser" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_user" property="updateUser" jdbcType="INTEGER" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, role_name, state, create_user, create_time, update_user, update_time
+    id, role_name, remark, create_user, create_time, update_user, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.exam.yiyou.examadmin.repository.model.RoleExample" >
     select
@@ -102,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.exam.yiyou.examadmin.repository.model.Role" >
-    insert into tb_role (id, role_name, state, 
+    insert into tb_role (id, role_name, remark, 
       create_user, create_time, update_user, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -118,8 +118,8 @@
       <if test="roleName != null" >
         role_name,
       </if>
-      <if test="state != null" >
-        state,
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="createUser != null" >
         create_user,
@@ -141,8 +141,8 @@
       <if test="roleName != null" >
         #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        #{state,jdbcType=CHAR},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null" >
         #{createUser,jdbcType=INTEGER},
@@ -173,8 +173,8 @@
       <if test="record.roleName != null" >
         role_name = #{record.roleName,jdbcType=VARCHAR},
       </if>
-      <if test="record.state != null" >
-        state = #{record.state,jdbcType=CHAR},
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.createUser != null" >
         create_user = #{record.createUser,jdbcType=INTEGER},
@@ -197,7 +197,7 @@
     update tb_role
     set id = #{record.id,jdbcType=INTEGER},
       role_name = #{record.roleName,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
       create_user = #{record.createUser,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_user = #{record.updateUser,jdbcType=INTEGER},
@@ -212,8 +212,8 @@
       <if test="roleName != null" >
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=CHAR},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="createUser != null" >
         create_user = #{createUser,jdbcType=INTEGER},
@@ -233,7 +233,7 @@
   <update id="updateByPrimaryKey" parameterType="com.exam.yiyou.examadmin.repository.model.Role" >
     update tb_role
     set role_name = #{roleName,jdbcType=VARCHAR},
-      state = #{state,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       create_user = #{createUser,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_user = #{updateUser,jdbcType=INTEGER},

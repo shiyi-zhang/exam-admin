@@ -1,15 +1,12 @@
 package com.exam.yiyou.examadmin.controller;
 
-import com.exam.yiyou.examadmin.entry.BaseResponseBean;
-import com.exam.yiyou.examadmin.entry.ExamBean;
 import com.exam.yiyou.examadmin.entry.PaperBean;
-import com.exam.yiyou.examadmin.repository.model.Exam;
 import com.exam.yiyou.examadmin.repository.model.Paper;
-import com.exam.yiyou.examadmin.service.ExamService;
 import com.exam.yiyou.examadmin.service.PaperService;
 import com.exam.yiyou.examadmin.utils.ApiVersion;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @ApiVersion(1)
 @RestController
-@RequestMapping("{version}/users")
+@RequestMapping("{version}/papers")
 public class PaperController {
 
     @Autowired
@@ -38,8 +35,9 @@ public class PaperController {
     @GetMapping
     public ResponseEntity list(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
         @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        Page page = PageHelper.startPage(pageNum, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponseBean<Paper>(paperService.list(), page));
+        PageHelper.startPage(pageNum, pageSize);
+        List<Paper> list = paperService.list();
+        return ResponseEntity.status(HttpStatus.OK).body(new PageInfo(list));
     }
 
     @PutMapping

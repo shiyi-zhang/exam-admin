@@ -1,12 +1,12 @@
 package com.exam.yiyou.examadmin.controller;
 
-import com.exam.yiyou.examadmin.entry.BaseResponseBean;
 import com.exam.yiyou.examadmin.entry.SpecialBean;
 import com.exam.yiyou.examadmin.repository.model.Special;
 import com.exam.yiyou.examadmin.service.SpecialService;
 import com.exam.yiyou.examadmin.utils.ApiVersion;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @ApiVersion(1)
 @RestController
-@RequestMapping("{version}/users")
+@RequestMapping("{version}/special")
 public class SpecialController {
 
     @Autowired
@@ -34,9 +34,11 @@ public class SpecialController {
 
     @GetMapping
     public ResponseEntity list(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
-        @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        Page page = PageHelper.startPage(pageNum, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponseBean<Special>(specialService.list(), page));
+        @RequestParam(required = false, defaultValue = "10") Integer pageSize,@RequestParam(required = false) String
+        name) {
+       PageHelper.startPage(pageNum, pageSize);
+        List<Special> list = specialService.list(name);
+        return ResponseEntity.status(HttpStatus.OK).body(new PageInfo(list));
     }
 
     @PutMapping

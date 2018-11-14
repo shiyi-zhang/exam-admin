@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface RoleService {
 
-    List<Role> list();
+    List<Role> list(String name);
 
     boolean update(RoleBean bean);
 

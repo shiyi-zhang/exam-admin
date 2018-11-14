@@ -1,11 +1,12 @@
 package com.exam.yiyou.examadmin.controller;
 
-import com.exam.yiyou.examadmin.entry.BaseResponseBean;
 import com.exam.yiyou.examadmin.entry.RoleBean;
+import com.exam.yiyou.examadmin.repository.model.Role;
 import com.exam.yiyou.examadmin.service.RoleService;
 import com.exam.yiyou.examadmin.utils.ApiVersion;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @ApiVersion(1)
 @RestController
-@RequestMapping("{version}/users")
+@RequestMapping("{version}/roles")
 public class RoleController {
 
     @Autowired
@@ -33,28 +34,30 @@ public class RoleController {
 
     @GetMapping
     public ResponseEntity list(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
-        @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        Page page = PageHelper.startPage(pageNum, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponseBean<>(roleService.list(), page));
+        @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+        @RequestParam(required = false) String name) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Role> list = roleService.list(name);
+        return ResponseEntity.status(HttpStatus.OK).body(new PageInfo(list));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody RoleBean bean){
+    public ResponseEntity update(@RequestBody RoleBean bean) {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.update(bean));
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody RoleBean bean){
+    public ResponseEntity save(@RequestBody RoleBean bean) {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.save(bean));
     }
 
     @DeleteMapping
-    public ResponseEntity delete(@RequestParam Integer id){
+    public ResponseEntity delete(@RequestParam Integer id) {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(roleService.delete(id));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity single(@PathVariable Integer id){
+    public ResponseEntity single(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(roleService.single(id));
     }
 

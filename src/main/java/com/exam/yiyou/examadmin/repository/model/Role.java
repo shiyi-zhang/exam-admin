@@ -7,7 +7,7 @@ public class Role {
 
     private String roleName;
 
-    private String state;
+    private String remark;
 
     private Integer createUser;
 
@@ -33,12 +33,12 @@ public class Role {
         this.roleName = roleName == null ? null : roleName.trim();
     }
 
-    public String getState() {
-        return state;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public Integer getCreateUser() {

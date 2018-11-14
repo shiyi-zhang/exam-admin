@@ -6,19 +6,25 @@ import com.exam.yiyou.examadmin.repository.model.Special;
 import com.exam.yiyou.examadmin.repository.model.SpecialExample;
 import com.exam.yiyou.examadmin.service.SpecialService;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 张世一
  * @version 1.0
  */
+@Service
 public class SpecialServiceImpl implements SpecialService {
     @Autowired
     private SpecialMapper specialMapper;
 
     @Override
-    public List<Special> list() {
+    public List<Special> list(String name) {
         SpecialExample specialExample=new SpecialExample();
+        if (StringUtils.isNotBlank(name)) {
+            specialExample.createCriteria().andNameLike("%" + name + "%");
+        }
         return specialMapper.selectByExample(specialExample);
     }
 

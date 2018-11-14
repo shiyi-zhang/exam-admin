@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface SpecialService {
 
-    List<Special> list();
+    List<Special> list(String name);
 
     boolean update(SpecialBean bean);
 

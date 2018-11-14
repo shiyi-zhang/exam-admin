@@ -1,12 +1,12 @@
 package com.exam.yiyou.examadmin.controller;
 
-import com.exam.yiyou.examadmin.entry.BaseResponseBean;
 import com.exam.yiyou.examadmin.entry.UserBean;
 import com.exam.yiyou.examadmin.repository.model.User;
 import com.exam.yiyou.examadmin.service.UserService;
 import com.exam.yiyou.examadmin.utils.ApiVersion;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,27 +35,28 @@ public class UserController {
     @GetMapping
     public ResponseEntity list(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
         @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        Page page = PageHelper.startPage(pageNum, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponseBean<User>(userService.list(), page));
+        PageHelper.startPage(pageNum, pageSize);
+        List<User> list = userService.list();
+        return ResponseEntity.status(HttpStatus.OK).body(new PageInfo(list));
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody UserBean bean){
+    public ResponseEntity update(@RequestBody UserBean bean) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(bean));
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody UserBean bean){
+    public ResponseEntity save(@RequestBody UserBean bean) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(bean));
     }
 
     @DeleteMapping
-    public ResponseEntity delete(@RequestParam Integer id){
+    public ResponseEntity delete(@RequestParam Integer id) {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(userService.delete(id));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity single(@PathVariable Integer id){
+    public ResponseEntity single(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.single(id));
     }
 
