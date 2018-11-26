@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,10 +34,15 @@ public class ExamController {
     private ExamService examService;
 
     @GetMapping
-    public ResponseEntity list(@RequestParam(required = false, defaultValue = "1") Integer pageNum,
+    public ResponseEntity list(
+        @RequestParam(required = false) String examContent,
+        @RequestParam(required = false) String type,
+        @RequestParam(required = false) Integer specialId,
+        @RequestParam(required = false) Integer paperId,
+        @RequestParam(required = false, defaultValue = "1") Integer pageNum,
         @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
        PageHelper.startPage(pageNum, pageSize);
-        List<Exam> list = examService.list();
+        List<Exam> list = examService.list(examContent,type,specialId,paperId);
         return ResponseEntity.status(HttpStatus.OK).body(new PageInfo(list));
 
     }
@@ -56,7 +62,7 @@ public class ExamController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(examService.delete(id));
     }
 
-    @GetMapping("/{id}")
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity single(@PathVariable Integer id){
         return ResponseEntity.status(HttpStatus.OK).body(examService.single(id));
     }

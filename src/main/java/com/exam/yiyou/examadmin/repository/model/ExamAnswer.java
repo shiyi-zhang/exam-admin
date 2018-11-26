@@ -7,7 +7,9 @@ public class ExamAnswer {
 
     private String label;
 
-    private String answer;
+    private Boolean answer;
+
+    private Integer level;
 
     public Integer getId() {
         return id;
@@ -33,11 +35,19 @@ public class ExamAnswer {
         this.label = label == null ? null : label.trim();
     }
 
-    public String getAnswer() {
+    public Boolean getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer == null ? null : answer.trim();
+    public void setAnswer(Boolean answer) {
+        this.answer = answer;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }

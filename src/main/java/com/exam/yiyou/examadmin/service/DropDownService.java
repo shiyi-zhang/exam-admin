@@ -1,5 +1,6 @@
 package com.exam.yiyou.examadmin.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -8,5 +9,11 @@ import java.util.Map;
  */
 public interface DropDownService {
 
-    Map<Integer,String> examList();
+    List<Map<String, String>> examList();
+
+    List<Map<String, String>> getPapers();
+
+    List<Map<String, String>> getSpecials();
+
+    List<Map<String, String>> getTestCentres();
 }

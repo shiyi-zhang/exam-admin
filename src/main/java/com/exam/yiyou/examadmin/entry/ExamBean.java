@@ -1,8 +1,9 @@
 package com.exam.yiyou.examadmin.entry;
 
 import com.exam.yiyou.examadmin.repository.model.Exam;
+import com.exam.yiyou.examadmin.repository.model.ExamAnswer;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -10,7 +11,7 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-@AllArgsConstructor
 public class ExamBean extends Exam implements Serializable {
 
+    private List<ExamAnswer> answers;
 }

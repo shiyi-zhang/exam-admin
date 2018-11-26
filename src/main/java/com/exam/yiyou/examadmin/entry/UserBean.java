@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Data
-@AllArgsConstructor
 public class UserBean extends User implements Serializable {
 
 }

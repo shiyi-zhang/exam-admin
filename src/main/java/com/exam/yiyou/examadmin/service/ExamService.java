@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface ExamService {
 
-    Exam single(Integer id);
+    ExamBean single(Integer id);
 
-    List<Exam> list();
+    List<Exam> list(String examContent, String type, Integer specialId, Integer paperId);
 
     boolean update(ExamBean bean);
 

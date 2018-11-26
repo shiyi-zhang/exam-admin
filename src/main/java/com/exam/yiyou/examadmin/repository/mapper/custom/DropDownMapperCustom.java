@@ -1,5 +1,6 @@
 package com.exam.yiyou.examadmin.repository.mapper.custom;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -8,5 +9,11 @@ import java.util.Map;
  */
 public interface DropDownMapperCustom {
 
-    Map<Integer,String> examList();
+    List<Map<String,String>> examList();
+
+    List<Map<String,String>> getPapers();
+
+    List<Map<String,String>> getSpecials();
+
+   List<Map<String,String>> getTestCentres();
 }

@@ -10,7 +10,6 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-@AllArgsConstructor
 public class SpecialBean extends Special implements Serializable {
 
 }

@@ -15,7 +15,7 @@
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
       connectionURL="jdbc:mysql://localhost:3306/test"
       userId="root"
-      password="123456"/>
+      password="root"/>
 
     <javaModelGenerator targetPackage="com.exam.yiyou.examadmin.repository.model"
       targetProject="/Users/kc/Documents/github/exam-admin/src/main/java">
@@ -37,24 +37,33 @@
     <table tableName="tb_error_exam" domainObjectName="ErrorExam">
     </table>
     <table tableName="tb_exam" domainObjectName="Exam">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_exam_answer" domainObjectName="ExamAnswer">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_expire" domainObjectName="Expire">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_module" domainObjectName="Module">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_paper" domainObjectName="Paper">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_role" domainObjectName="Role">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_role_source" domainObjectName="RoleSource">
     </table>
     <table tableName="tb_special" domainObjectName="Special">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_test_centre" domainObjectName="testCentre">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_user" domainObjectName="User">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
     </table>
     <table tableName="tb_user_role" domainObjectName="UserRole">
     </table>

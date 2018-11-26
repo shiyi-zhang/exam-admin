@@ -5,7 +5,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="exam_id" property="examId" jdbcType="INTEGER" />
     <result column="label" property="label" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="CHAR" />
+    <result column="answer" property="answer" jdbcType="BIT" />
+    <result column="level" property="level" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, exam_id, label, answer
+    id, exam_id, label, answer, level
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.exam.yiyou.examadmin.repository.model.ExamAnswerExample" >
     select
@@ -99,17 +100,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.exam.yiyou.examadmin.repository.model.ExamAnswer" >
-    insert into tb_exam_answer (id, exam_id, label, 
-      answer)
-    values (#{id,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=CHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_exam_answer (exam_id, label, answer, 
+      level)
+    values (#{examId,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}, #{answer,jdbcType=BIT}, 
+      #{level,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.exam.yiyou.examadmin.repository.model.ExamAnswer" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_exam_answer
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="examId != null" >
         exam_id,
       </if>
@@ -119,11 +123,11 @@
       <if test="answer != null" >
         answer,
       </if>
+      <if test="level != null" >
+        level,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="examId != null" >
         #{examId,jdbcType=INTEGER},
       </if>
@@ -131,7 +135,10 @@
         #{label,jdbcType=VARCHAR},
       </if>
       <if test="answer != null" >
-        #{answer,jdbcType=CHAR},
+        #{answer,jdbcType=BIT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -154,7 +161,10 @@
         label = #{record.label,jdbcType=VARCHAR},
       </if>
       <if test="record.answer != null" >
-        answer = #{record.answer,jdbcType=CHAR},
+        answer = #{record.answer,jdbcType=BIT},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       exam_id = #{record.examId,jdbcType=INTEGER},
       label = #{record.label,jdbcType=VARCHAR},
-      answer = #{record.answer,jdbcType=CHAR}
+      answer = #{record.answer,jdbcType=BIT},
+      level = #{record.level,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -181,7 +192,10 @@
         label = #{label,jdbcType=VARCHAR},
       </if>
       <if test="answer != null" >
-        answer = #{answer,jdbcType=CHAR},
+        answer = #{answer,jdbcType=BIT},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -190,7 +204,8 @@
     update tb_exam_answer
     set exam_id = #{examId,jdbcType=INTEGER},
       label = #{label,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=CHAR}
+      answer = #{answer,jdbcType=BIT},
+      level = #{level,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

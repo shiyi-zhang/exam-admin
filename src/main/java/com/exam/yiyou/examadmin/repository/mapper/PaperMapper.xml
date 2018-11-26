@@ -103,19 +103,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.exam.yiyou.examadmin.repository.model.Paper" >
-    insert into tb_paper (id, paper_name, special_id, 
-      remark, create_time, create_user, 
-      update_time, update_user)
-    values (#{id,jdbcType=INTEGER}, #{paperName,jdbcType=VARCHAR}, #{specialId,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_paper (paper_name, special_id, remark, 
+      create_time, create_user, update_time, 
+      update_user)
+    values (#{paperName,jdbcType=VARCHAR}, #{specialId,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.exam.yiyou.examadmin.repository.model.Paper" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_paper
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="paperName != null" >
         paper_name,
       </if>
@@ -139,9 +142,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="paperName != null" >
         #{paperName,jdbcType=VARCHAR},
       </if>

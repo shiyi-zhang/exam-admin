@@ -10,7 +10,6 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-@AllArgsConstructor
 public class RoleBean extends Role implements Serializable {
 
 }

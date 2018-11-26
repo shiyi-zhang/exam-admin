@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.exam.yiyou.examadmin.repository.mapper.custom.DropDownMapperCustom">
   <select id="examList" resultType="map">
-    select id,name from tb_paper
+    select id,content name from tb_paper
+  </select>
+  <select id="getPapers" resultType="map">
+    select id,paper_name name from tb_paper;
+  </select>
+  <select id="getSpecials" resultType="map">
+    select id,name from tb_special;
+  </select>
+  <select id="getTestCentres" resultType="map">
+    select id,title name from tb_test_centre
   </select>
 </mapper>

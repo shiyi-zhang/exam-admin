@@ -132,23 +132,26 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.exam.yiyou.examadmin.repository.model.Exam" >
-    insert into tb_exam (id, content, paper_id, 
-      test_centre_id, special_id, type, 
-      importance, remark, create_user, 
-      create_time, update_user, update_time, 
-      analysis)
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{paperId,jdbcType=INTEGER}, 
-      #{testCentreId,jdbcType=INTEGER}, #{specialId,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, 
-      #{importance,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{analysis,jdbcType=LONGVARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_exam (content, paper_id, test_centre_id, 
+      special_id, type, importance, 
+      remark, create_user, create_time, 
+      update_user, update_time, analysis
+      )
+    values (#{content,jdbcType=VARCHAR}, #{paperId,jdbcType=INTEGER}, #{testCentreId,jdbcType=INTEGER}, 
+      #{specialId,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, #{importance,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{analysis,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.exam.yiyou.examadmin.repository.model.Exam" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_exam
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="content != null" >
         content,
       </if>
@@ -187,9 +190,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
